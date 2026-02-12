@@ -2,467 +2,708 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verb To Be Mastery | One English</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Plataforma educativa exclusiva para estudiantes de One English. Lección: Verb To Be.">
+    <meta name="theme-color" content="#2C4A84">
     
-    <link rel="icon" href="https://drive.google.com/uc?export=view&id=10s6xhtE73EiO97ePKbnAsXuTP5RkvnTB" type="image/png">
+    <title>Verb To Be Module | One English</title>
+    
+    <link rel="icon" href="https://lh3.googleusercontent.com/d/10s6xhtE73EiO97ePKbnAsXuTP5RkvnTB" type="image/png">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Lora:ital@1&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ========================================
-           ONE ENGLISH DESIGN SYSTEM (2026)
-           ======================================== */
+        /* ==========================================================================
+           1. ONE ENGLISH DESIGN SYSTEM (CORPORATE PALETTE)
+           ========================================================================== */
         :root {
-            --text-main: #2C4A84;       /* Azul Oscuro Texto */
-            --titles: #2AA6C4;          /* Cyan Títulos */
-            --elements: #2F4F8F;        /* Azul Medio Elementos */
-            --bg-white: #FFFFFF;        /* Fondo */
-            --nav-btn: #3BB6D6;         /* Botones/Nav */
-            --contrast: #F1F1F1;        /* Fondo Contraste */
-            --error: #ef4444;
+            /* --- PRIMARY COLORS --- */
+            --oe-navy: #2C4A84;       /* Main Text / Headers */
+            --oe-royal: #2F4F8F;      /* Elements / Borders */
+            --oe-cyan: #2AA6C4;       /* Highlights / Titles */
+            --oe-sky: #3BB6D6;        /* Buttons / Accents */
+            
+            /* --- NEUTRALS --- */
+            --bg-white: #FFFFFF;
+            --bg-offwhite: #F8FAFC;
+            --bg-contrast: #F1F1F1;
+            --border-light: #E2E8F0;
+            
+            /* --- FUNCTIONAL --- */
+            --shadow-soft: 0 10px 30px -10px rgba(44, 74, 132, 0.15);
+            --shadow-hover: 0 20px 40px -10px rgba(44, 74, 132, 0.25);
+            --radius-card: 20px;
+            --radius-btn: 12px;
+            
+            /* --- TYPOGRAPHY --- */
+            --font-ui: 'Poppins', sans-serif;
+            --font-serif: 'Lora', serif;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Poppins', sans-serif; background: var(--bg-white); color: var(--text-main); overflow-x: hidden; }
+        /* --- GLOBAL RESET & BASE --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; -webkit-tap-highlight-color: transparent; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body { 
+            font-family: var(--font-ui); 
+            background-color: var(--bg-offwhite); 
+            color: var(--oe-navy); 
+            line-height: 1.7;
+            font-size: 16px; /* Base size adjustable via JS */
+            overflow-x: hidden;
+        }
 
-        /* --- LOGIN SCREEN --- */
-        #login-overlay {
+        /* --- IMAGES & FALLBACKS --- */
+        img { max-width: 100%; display: block; }
+        
+        /* Fallback para el Banner si falla Drive */
+        .banner-fallback {
+            background: linear-gradient(135deg, var(--oe-navy), var(--oe-cyan));
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.5rem; font-weight: 700;
+            width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: -1;
+        }
+
+        /* ==========================================================================
+           2. LOGIN PORTAL (SECURITY SIMULATION)
+           ========================================================================== */
+        #portal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: linear-gradient(135deg, var(--elements), var(--text-main));
-            z-index: 9999; display: flex; align-items: center; justify-content: center;
-            flex-direction: column; transition: opacity 0.5s ease;
+            background: #f0f4f8; z-index: 9999;
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .login-card {
+            background: var(--bg-white);
+            width: 90%; max-width: 420px;
+            padding: 3rem 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(44, 74, 132, 0.25);
+            text-align: center;
+            border-top: 6px solid var(--oe-cyan);
+            position: relative; overflow: hidden;
+        }
+
+        .login-icon {
+            width: 80px; height: 80px; margin: 0 auto 1.5rem;
+            background: var(--bg-contrast); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; color: var(--oe-navy);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+        }
+
+        .login-title { font-family: var(--font-serif); font-size: 1.8rem; color: var(--oe-navy); margin-bottom: 0.5rem; }
+        .login-subtitle { color: #64748b; font-size: 0.9rem; margin-bottom: 2rem; }
+
+        .form-group { text-align: left; margin-bottom: 1.2rem; }
+        .form-label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--oe-royal); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
+        .form-input {
+            width: 100%; padding: 14px 16px; border: 2px solid var(--border-light);
+            border-radius: var(--radius-btn); font-size: 1rem; color: var(--oe-navy);
+            font-family: var(--font-ui); transition: 0.3s; background: var(--bg-offwhite);
+        }
+        .form-input:focus { border-color: var(--oe-cyan); background: var(--bg-white); box-shadow: 0 0 0 4px rgba(42, 166, 196, 0.1); }
+
+        .btn-submit {
+            width: 100%; padding: 16px; margin-top: 1rem;
+            background: linear-gradient(90deg, var(--oe-sky), var(--oe-cyan));
+            color: white; border: none; border-radius: var(--radius-btn);
+            font-size: 1.1rem; font-weight: 700; cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 20px rgba(59, 182, 214, 0.3);
+        }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(59, 182, 214, 0.4); }
+        .btn-submit:active { transform: translateY(0); }
+
+        .login-msg { 
+            margin-top: 1.5rem; font-size: 0.9rem; color: #ef4444; 
+            background: #fef2f2; padding: 10px; border-radius: 8px; 
+            border: 1px solid #fecaca; display: none; 
+        }
+
+        /* ==========================================================================
+           3. APP SHELL (NAVIGATION & LAYOUT)
+           ========================================================================== */
+        #lms-container { display: none; opacity: 0; transition: opacity 0.8s ease; }
+
+        /* --- Header --- */
+        .app-header {
+            background: var(--bg-white); position: sticky; top: 0; z-index: 100;
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
         }
         
-        .login-box {
-            background: var(--bg-white); padding: 3rem; border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2); text-align: center; width: 90%; max-width: 400px;
-        }
-        
-        .login-logo { width: 80px; margin-bottom: 1rem; }
-        
-        .input-group { margin-bottom: 1.5rem; text-align: left; }
-        .input-group label { display: block; font-size: 0.9rem; font-weight: 600; color: var(--text-main); margin-bottom: 5px; }
-        .input-group input {
-            width: 100%; padding: 12px; border: 2px solid var(--contrast); border-radius: 10px;
-            font-family: inherit; outline: none; transition: 0.3s;
-        }
-        .input-group input:focus { border-color: var(--titles); }
-        
-        .btn-login {
-            width: 100%; padding: 15px; background: var(--nav-btn); color: white; border: none;
-            border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 1rem;
-        }
-        .btn-login:hover { background: var(--titles); transform: translateY(-2px); }
-        
-        .error-msg { color: var(--error); font-size: 0.85rem; margin-top: 10px; display: none; }
-
-        /* --- MAIN APP LAYOUT --- */
-        #app-container { display: none; opacity: 0; transition: opacity 1s ease; }
-
-        /* Header & Banner */
-        header { background: var(--bg-white); box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
-        
-        .top-bar {
-            padding: 1rem 5%; display: flex; align-items: center; justify-content: space-between;
-        }
-        .brand { display: flex; align-items: center; gap: 15px; font-weight: 700; font-size: 1.2rem; color: var(--elements); }
-        .brand img { width: 40px; }
-
-        .banner-container {
-            width: 100%; height: 250px; overflow: hidden; position: relative;
-        }
-        .banner-img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-        .banner-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to right, rgba(44, 74, 132, 0.8), transparent);
-            display: flex; align-items: center; padding-left: 5%;
-        }
-        .banner-title { color: white; font-size: 2.5rem; font-weight: 700; text-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-
-        /* Navigation Tabs */
-        .nav-tabs {
-            display: flex; justify-content: center; background: var(--contrast); padding: 10px;
-            gap: 10px; flex-wrap: wrap; border-bottom: 1px solid #e0e0e0;
-        }
-        
-        .tab-btn {
-            background: transparent; border: none; padding: 12px 25px; border-radius: 30px;
-            color: var(--text-main); font-weight: 600; cursor: pointer; transition: 0.3s;
-            font-family: 'Poppins', sans-serif;
-        }
-        .tab-btn:hover { background: rgba(59, 182, 214, 0.1); color: var(--titles); }
-        .tab-btn.active { background: var(--nav-btn); color: white; box-shadow: 0 4px 15px rgba(59, 182, 214, 0.4); }
-
-        /* Content Sections */
-        .content-area { padding: 3rem 5%; max-width: 1200px; margin: 0 auto; min-height: 60vh; }
-        
-        .section { display: none; animation: slideUp 0.6s ease; }
-        .section.active { display: block; }
-
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        h2 { color: var(--titles); margin-bottom: 1.5rem; font-size: 2rem; border-left: 5px solid var(--elements); padding-left: 15px; }
-        h3 { color: var(--elements); margin-top: 2rem; margin-bottom: 1rem; font-size: 1.3rem; }
-        p { margin-bottom: 1rem; line-height: 1.8; color: #555; }
-
-        /* Interactive Cards */
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        
-        .info-card {
-            background: white; border: 1px solid var(--contrast); border-radius: 15px;
-            padding: 2rem; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: 0.3s;
-            border-top: 4px solid var(--nav-btn);
-        }
-        .info-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-
-        /* Audio Button Style */
-        .example-box {
-            background: var(--contrast); padding: 15px; border-radius: 10px; margin-bottom: 10px;
+        .header-content {
+            max-width: 1200px; margin: 0 auto; padding: 0.8rem 1.5rem;
             display: flex; align-items: center; justify-content: space-between;
         }
-        .eng-text { font-weight: 600; color: var(--elements); font-size: 1.1rem; }
-        .span-text { display: block; font-size: 0.85rem; color: #777; margin-top: 4px; font-style: italic; }
+
+        .logo-area { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { width: 45px; height: 45px; border-radius: 10px; object-fit: cover; }
+        .logo-text { font-family: var(--font-ui); font-weight: 800; font-size: 1.4rem; color: var(--oe-navy); letter-spacing: -0.5px; }
+        .logo-text span { color: var(--oe-cyan); }
+
+        .user-panel { display: flex; align-items: center; gap: 15px; }
+        .user-info { text-align: right; display: none; } /* Hidden on mobile */
+        .user-name { font-weight: 700; font-size: 0.9rem; color: var(--oe-navy); display: block; }
+        .user-role { font-size: 0.75rem; color: var(--oe-sky); font-weight: 600; text-transform: uppercase; }
+        .user-avatar { width: 40px; height: 40px; background: var(--bg-contrast); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--oe-royal); border: 2px solid var(--border-light); }
+
+        /* Settings Toggle */
+        .settings-btn { background: none; border: none; font-size: 1.2rem; color: var(--oe-navy); cursor: pointer; margin-left: 10px; }
+
+        /* --- Hero Banner --- */
+        .hero-section {
+            position: relative; width: 100%; height: 280px; overflow: hidden;
+            background: var(--oe-navy);
+        }
+        .hero-bg {
+            width: 100%; height: 100%; object-fit: cover; opacity: 0.6;
+            transition: transform 10s ease; /* Subtle zoom effect */
+        }
+        .hero-section:hover .hero-bg { transform: scale(1.05); }
         
-        .btn-audio {
-            background: white; width: 40px; height: 40px; border-radius: 50%; border: none;
-            color: var(--nav-btn); cursor: pointer; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: 0.2s;
+        .hero-content {
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 2rem 5%;
+            background: linear-gradient(to top, rgba(44, 74, 132, 0.9), transparent);
+            color: white;
         }
-        .btn-audio:hover { background: var(--nav-btn); color: white; transform: scale(1.1); }
+        .breadcrumb { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; margin-bottom: 5px; }
+        .hero-title { font-family: var(--font-serif); font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; line-height: 1.1; margin-bottom: 10px; }
+        .hero-meta { display: flex; gap: 15px; font-size: 0.9rem; opacity: 0.9; }
+        .meta-tag { display: flex; align-items: center; gap: 6px; }
 
-        /* Tables */
-        table { width: 100%; border-collapse: collapse; margin-top: 1rem; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
-        th { background: var(--elements); color: white; padding: 15px; text-align: left; }
-        td { padding: 15px; border-bottom: 1px solid var(--contrast); color: #555; }
+        /* --- Tab Navigation (Sticky) --- */
+        .tab-wrapper {
+            background: var(--bg-white); border-bottom: 1px solid var(--border-light);
+            position: sticky; top: 70px; z-index: 90; overflow-x: auto;
+            white-space: nowrap; -webkit-overflow-scrolling: touch;
+        }
+        .tab-list {
+            max-width: 1200px; margin: 0 auto; display: flex; padding: 0 1.5rem; gap: 2rem;
+        }
+        .tab-item {
+            padding: 1rem 0; color: #64748b; font-weight: 600; cursor: pointer;
+            border-bottom: 3px solid transparent; transition: 0.3s; font-size: 0.95rem;
+        }
+        .tab-item:hover { color: var(--oe-cyan); }
+        .tab-item.active { color: var(--oe-navy); border-bottom-color: var(--oe-cyan); }
+
+        /* Mobile specific adjustments */
+        @media (min-width: 768px) {
+            .user-info { display: block; }
+        }
+
+        /* ==========================================================================
+           4. CONTENT MODULES
+           ========================================================================== */
+        .main-content {
+            max-width: 1000px; margin: 3rem auto; padding: 0 1.5rem; min-height: 60vh;
+        }
+
+        .lesson-module { display: none; animation: fadeInUp 0.5s ease; }
+        .lesson-module.active { display: block; }
+        
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- Typography Components --- */
+        .section-header { margin-bottom: 2rem; border-left: 5px solid var(--oe-cyan); padding-left: 20px; }
+        .section-title { font-family: var(--font-serif); font-size: 2rem; color: var(--oe-navy); margin-bottom: 0.5rem; }
+        .section-desc { font-size: 1.1rem; color: #64748b; }
+
+        h3 { font-size: 1.4rem; color: var(--oe-royal); margin: 2rem 0 1rem; font-weight: 700; }
+        p { margin-bottom: 1.5rem; color: #475569; }
+
+        /* --- Card System --- */
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 2rem; }
+        
+        .card {
+            background: var(--bg-white); border-radius: var(--radius-card); padding: 2rem;
+            border: 1px solid var(--border-light); box-shadow: var(--shadow-soft);
+            transition: transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: var(--oe-cyan); }
+        
+        .card-icon { 
+            width: 50px; height: 50px; background: rgba(42, 166, 196, 0.1); 
+            color: var(--oe-cyan); border-radius: 12px; display: flex; align-items: center; 
+            justify-content: center; font-size: 1.5rem; margin-bottom: 1.5rem; 
+        }
+
+        /* --- Audio Examples --- */
+        .audio-strip {
+            background: var(--bg-offwhite); border: 1px solid var(--border-light);
+            border-radius: 12px; padding: 15px 20px; margin-bottom: 12px;
+            display: flex; align-items: center; justify-content: space-between;
+            transition: 0.2s;
+        }
+        .audio-strip:hover { border-color: var(--oe-sky); background: white; }
+        
+        .text-content { display: flex; flex-direction: column; }
+        .en { font-family: var(--font-serif); font-weight: 600; font-size: 1.1rem; color: var(--oe-navy); }
+        .es { font-size: 0.85rem; color: #94a3b8; font-style: italic; }
+        
+        .btn-play {
+            width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--border-light);
+            background: white; color: var(--oe-sky); cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: 0.2s;
+        }
+        .btn-play:hover { background: var(--oe-sky); color: white; border-color: var(--oe-sky); transform: scale(1.1); }
+
+        /* --- Data Tables (Responsive) --- */
+        .table-responsive { overflow-x: auto; border-radius: 16px; border: 1px solid var(--border-light); margin: 1.5rem 0; }
+        table { width: 100%; border-collapse: collapse; background: white; min-width: 600px; }
+        th { background: var(--oe-royal); color: white; padding: 18px; text-align: left; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        td { padding: 18px; border-bottom: 1px solid var(--border-light); color: var(--oe-navy); }
         tr:last-child td { border-bottom: none; }
-        tr:hover { background-color: #f9f9f9; }
+        tr:hover td { background: rgba(42, 166, 196, 0.03); }
+        
+        .highlight { font-weight: 700; color: var(--oe-cyan); }
 
-        /* Footer */
-        footer {
-            background: var(--elements); color: white; text-align: center; padding: 2rem;
-            margin-top: 4rem; font-size: 0.9rem;
+        /* --- Settings Modal --- */
+        #settings-modal {
+            position: fixed; top: 80px; right: 20px; background: white; width: 250px;
+            padding: 1.5rem; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            border: 1px solid var(--border-light); z-index: 200; display: none; animation: slideIn 0.3s;
         }
-        .license { font-family: 'Lora', serif; font-style: italic; opacity: 0.7; margin-top: 10px; display: block;}
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .range-slider { width: 100%; margin: 10px 0; }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .banner-title { font-size: 1.8rem; }
-            .nav-tabs { gap: 5px; }
-            .tab-btn { padding: 10px 15px; font-size: 0.9rem; }
+        /* --- Footer --- */
+        .app-footer {
+            background: var(--oe-navy); color: white; padding: 4rem 2rem 2rem;
+            text-align: center; margin-top: 4rem;
         }
+        .footer-logo { font-size: 1.5rem; font-family: var(--font-serif); font-weight: 700; margin-bottom: 1rem; display: block; }
+        .footer-info { font-size: 0.9rem; opacity: 0.7; margin-bottom: 2rem; }
+        .legal-strip { 
+            border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; 
+            font-size: 0.75rem; color: #94a3b8; display: flex; justify-content: center; gap: 20px;
+        }
+
     </style>
 </head>
 <body>
 
-    <div id="login-overlay">
-        <div class="login-box">
-            <img src="https://drive.google.com/uc?export=view&id=10s6xhtE73EiO97ePKbnAsXuTP5RkvnTB" alt="One English Logo" class="login-logo">
-            <h2 style="border:none; padding:0; text-align:center; font-size:1.5rem; margin-bottom:2rem;">One English Portal</h2>
-            
-            <div class="input-group">
-                <label>Usuario</label>
-                <input type="text" id="username" placeholder="Ingresa tu ID">
+    <div id="settings-modal">
+        <h4 style="margin-bottom:10px; color:var(--oe-navy);">Configuración</h4>
+        <label style="font-size:0.85rem; color:#64748b;">Tamaño de Texto</label>
+        <input type="range" min="14" max="22" value="16" class="range-slider" id="font-slider" oninput="adjustFont(this.value)">
+        <p style="font-size:0.8rem; color:#94a3b8; margin-top:5px;">Ajusta para mejor lectura.</p>
+    </div>
+
+    <div id="portal-overlay">
+        <div class="login-card">
+            <div class="login-icon">
+                <i class="fas fa-graduation-cap"></i>
             </div>
-            <div class="input-group">
-                <label>Contraseña</label>
-                <input type="password" id="password" placeholder="••••••••">
-            </div>
+            <h1 class="login-title">Student Portal</h1>
+            <p class="login-subtitle">Acceso exclusivo One English</p>
             
-            <button class="btn-login" onclick="attemptLogin()">INGRESAR A CLASE</button>
-            <p class="error-msg" id="login-error">Credenciales incorrectas. Intenta de nuevo.</p>
+            <form onsubmit="return attemptLogin(event)">
+                <div class="form-group">
+                    <label class="form-label">ID de Estudiante</label>
+                    <input type="text" id="username" class="form-input" placeholder="Ej. 1englishdemo" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Contraseña</label>
+                    <input type="password" id="password" class="form-input" placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-submit">INICIAR SESIÓN <i class="fas fa-arrow-right"></i></button>
+            </form>
+            
+            <div id="login-msg" class="login-msg">
+                <i class="fas fa-exclamation-circle"></i> Credenciales no válidas.
+            </div>
+            <div style="margin-top:1.5rem; font-size:0.8rem; color:#94a3b8;">
+                &copy; 2026 One English School System
+            </div>
         </div>
     </div>
 
-    <div id="app-container">
+    <div id="lms-container">
         
-        <header>
-            <div class="top-bar">
-                <div class="brand">
-                    <img src="https://drive.google.com/uc?export=view&id=10s6xhtE73EiO97ePKbnAsXuTP5RkvnTB" alt="Logo">
-                    ONE ENGLISH
-                </div>
-                <div style="font-size:0.9rem; font-weight:600; color:var(--text-main);">
-                    <i class="fas fa-user-circle"></i> Student Mode
+        <header class="app-header">
+            <div class="header-content">
+                <a href="#" class="logo-area">
+                    <div style="position:relative; width:45px; height:45px; overflow:hidden; border-radius:10px;">
+                        <img src="https://lh3.googleusercontent.com/d/10s6xhtE73EiO97ePKbnAsXuTP5RkvnTB" alt="OE" class="logo-img" onerror="this.style.display='none'">
+                        <div class="banner-fallback" style="font-size:0.8rem;">OE</div>
+                    </div>
+                    <div class="logo-text">ONE <span>ENGLISH</span></div>
+                </a>
+                
+                <div class="user-panel">
+                    <div class="user-info">
+                        <span class="user-name">Demo Student</span>
+                        <span class="user-role">Level 1 - Foundations</span>
+                    </div>
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <button class="settings-btn" onclick="toggleSettings()"><i class="fas fa-cog"></i></button>
                 </div>
             </div>
         </header>
 
-        <div class="banner-container">
-            <img src="https://drive.google.com/uc?export=view&id=10jdlHtQJLviy5sX2h9W8VfsP4I9tWera" alt="Banner" class="banner-img">
-            <div class="banner-overlay">
-                <div class="banner-title">The Verb To Be<br><span style="font-size:1.2rem; font-weight:400; font-family:'Lora', serif;">Foundation Level • Present Tense</span></div>
+        <div class="hero-section">
+            <div style="position:absolute; top:0; left:0; width:100%; height:100%;">
+                <img src="https://lh3.googleusercontent.com/d/10jdlHtQJLviy5sX2h9W8VfsP4I9tWera" class="hero-bg" onerror="this.style.display='none'">
+                <div class="banner-fallback">One English Learning Suite</div>
+            </div>
+            <div class="hero-content">
+                <div class="breadcrumb">Module 01 / Grammar / Present Tense</div>
+                <h1 class="hero-title">The Verb To Be</h1>
+                <div class="hero-meta">
+                    <div class="meta-tag"><i class="far fa-clock"></i> 15 min read</div>
+                    <div class="meta-tag"><i class="fas fa-signal"></i> Beginner (A1)</div>
+                </div>
             </div>
         </div>
 
-        <nav class="nav-tabs">
-            <button class="tab-btn active" onclick="openTab('intro')">Introducción</button>
-            <button class="tab-btn" onclick="openTab('affirmative')">Afirmativo</button>
-            <button class="tab-btn" onclick="openTab('negative')">Negativo</button>
-            <button class="tab-btn" onclick="openTab('interrogative')">Preguntas</button>
-            <button class="tab-btn" onclick="openTab('uses')">Usos Comunes</button>
-        </nav>
+        <div class="tab-wrapper">
+            <div class="tab-list">
+                <div class="tab-item active" onclick="switchTab('intro', this)">1. Introducción</div>
+                <div class="tab-item" onclick="switchTab('affirmative', this)">2. Afirmativo</div>
+                <div class="tab-item" onclick="switchTab('negative', this)">3. Negativo</div>
+                <div class="tab-item" onclick="switchTab('questions', this)">4. Preguntas</div>
+                <div class="tab-item" onclick="switchTab('short', this)">5. Short Answers</div>
+                <div class="tab-item" onclick="switchTab('uses', this)">6. Usos Especiales</div>
+            </div>
+        </div>
 
-        <div class="content-area">
+        <div class="main-content">
 
-            <div id="intro" class="section active">
-                <h2>El Corazón del Inglés</h2>
-                <p>El verbo <strong>To Be</strong> es el rey de los verbos. A diferencia del español, donde tenemos "Ser" y "Estar", en inglés usamos una sola palabra para ambos conceptos. Es fundamental porque funciona como su propio auxiliar.</p>
+            <div id="intro" class="lesson-module active">
+                <div class="section-header">
+                    <h2 class="section-title">El Rey de los Verbos</h2>
+                    <p class="section-desc">Entendiendo la base fundamental del inglés.</p>
+                </div>
                 
-                <div class="card-grid">
-                    <div class="info-card">
-                        <i class="fas fa-id-card fa-2x" style="color:var(--titles); margin-bottom:15px;"></i>
+                <p>El verbo <strong>To Be</strong> es único. En español, lo traducimos como dos verbos diferentes: <strong>Ser</strong> (Identidad) y <strong>Estar</strong> (Ubicación/Estado). En inglés, es una sola palabra poderosa que conecta al sujeto con su información.</p>
+
+                <div class="info-grid">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-fingerprint"></i></div>
                         <h3>Identidad (Ser)</h3>
-                        <p>Se usa para decir quién eres, tu profesión o características permanentes.</p>
-                        <div class="example-box">
-                            <div><span class="eng-text">I am a teacher.</span><span class="span-text">Soy un maestro.</span></div>
-                            <button class="btn-audio" onclick="speak('I am a teacher')"><i class="fas fa-volume-up"></i></button>
+                        <p>Se usa para nombres, profesiones, nacionalidades y características permanentes.</p>
+                        <div class="audio-strip">
+                            <div class="text-content"><span class="en">I am a doctor.</span><span class="es">Soy doctor.</span></div>
+                            <button class="btn-play" onclick="speak('I am a doctor')"><i class="fas fa-play"></i></button>
+                        </div>
+                        <div class="audio-strip">
+                            <div class="text-content"><span class="en">She is Mexican.</span><span class="es">Ella es mexicana.</span></div>
+                            <button class="btn-play" onclick="speak('She is Mexican')"><i class="fas fa-play"></i></button>
                         </div>
                     </div>
-                    <div class="info-card">
-                        <i class="fas fa-map-marker-alt fa-2x" style="color:var(--titles); margin-bottom:15px;"></i>
-                        <h3>Estado/Lugar (Estar)</h3>
-                        <p>Se usa para emociones temporales o ubicación física.</p>
-                        <div class="example-box">
-                            <div><span class="eng-text">She is happy.</span><span class="span-text">Ella está feliz.</span></div>
-                            <button class="btn-audio" onclick="speak('She is happy')"><i class="fas fa-volume-up"></i></button>
+                    
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-map-marked-alt"></i></div>
+                        <h3>Estado (Estar)</h3>
+                        <p>Se usa para emociones temporales, ubicación física y salud.</p>
+                        <div class="audio-strip">
+                            <div class="text-content"><span class="en">We are happy.</span><span class="es">Estamos felices.</span></div>
+                            <button class="btn-play" onclick="speak('We are happy')"><i class="fas fa-play"></i></button>
+                        </div>
+                        <div class="audio-strip">
+                            <div class="text-content"><span class="en">They are at school.</span><span class="es">Están en la escuela.</span></div>
+                            <button class="btn-play" onclick="speak('They are at school')"><i class="fas fa-play"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="affirmative" class="section">
-                <h2>Forma Afirmativa</h2>
-                <p>En el presente, el verbo cambia según la persona. Existen formas largas (formales) y formas cortas o "contracciones" (informales, usadas al hablar).</p>
+            <div id="affirmative" class="lesson-module">
+                <div class="section-header">
+                    <h2 class="section-title">Estructura Afirmativa</h2>
+                    <p class="section-desc">Formas largas vs. Contracciones.</p>
+                </div>
                 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Sujeto</th>
-                            <th>Forma Larga</th>
-                            <th>Contracción (Short)</th>
-                            <th>Ejemplo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>I (Yo)</td>
-                            <td>Am</td>
-                            <td>I'm</td>
-                            <td><button class="btn-audio" style="width:30px; height:30px;" onclick="speak('I am smart')"><i class="fas fa-play" style="font-size:0.7rem;"></i></button> I'm smart.</td>
-                        </tr>
-                        <tr>
-                            <td>He (Él)</td>
-                            <td>Is</td>
-                            <td>He's</td>
-                            <td><button class="btn-audio" style="width:30px; height:30px;" onclick="speak('He is tall')"><i class="fas fa-play" style="font-size:0.7rem;"></i></button> He's tall.</td>
-                        </tr>
-                        <tr>
-                            <td>She (Ella)</td>
-                            <td>Is</td>
-                            <td>She's</td>
-                            <td><button class="btn-audio" style="width:30px; height:30px;" onclick="speak('She is here')"><i class="fas fa-play" style="font-size:0.7rem;"></i></button> She's here.</td>
-                        </tr>
-                        <tr>
-                            <td>It (Eso/Cosa)</td>
-                            <td>Is</td>
-                            <td>It's</td>
-                            <td><button class="btn-audio" style="width:30px; height:30px;" onclick="speak('It is cold')"><i class="fas fa-play" style="font-size:0.7rem;"></i></button> It's cold.</td>
-                        </tr>
-                        <tr>
-                            <td>We (Nosotros)</td>
-                            <td>Are</td>
-                            <td>We're</td>
-                            <td><button class="btn-audio" style="width:30px; height:30px;" onclick="speak('We are friends')"><i class="fas fa-play" style="font-size:0.7rem;"></i></button> We're friends.</td>
-                        </tr>
-                        <tr>
-                            <td>They (Ellos)</td>
-                            <td>Are</td>
-                            <td>They're</td>
-                            <td><button class="btn-audio" style="width:30px; height:30px;" onclick="speak('They are late')"><i class="fas fa-play" style="font-size:0.7rem;"></i></button> They're late.</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <p>En inglés hablado, casi siempre usamos <strong>contracciones</strong> (unir dos palabras). Es vital aprenderlas para sonar natural.</p>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sujeto</th>
+                                <th>Verbo</th>
+                                <th>Contracción</th>
+                                <th>Ejemplo (Click para escuchar)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>I</td><td>am</td><td class="highlight">I'm</td><td onclick="speak('I am smart. I\'m smart.')" style="cursor:pointer;"><i class="fas fa-volume-up" style="color:var(--oe-sky)"></i> I'm smart.</td></tr>
+                            <tr><td>He</td><td>is</td><td class="highlight">He's</td><td onclick="speak('He is tall. He\'s tall.')" style="cursor:pointer;"><i class="fas fa-volume-up" style="color:var(--oe-sky)"></i> He's tall.</td></tr>
+                            <tr><td>She</td><td>is</td><td class="highlight">She's</td><td onclick="speak('She is nice. She\'s nice.')" style="cursor:pointer;"><i class="fas fa-volume-up" style="color:var(--oe-sky)"></i> She's nice.</td></tr>
+                            <tr><td>It</td><td>is</td><td class="highlight">It's</td><td onclick="speak('It is fast. It\'s fast.')" style="cursor:pointer;"><i class="fas fa-volume-up" style="color:var(--oe-sky)"></i> It's fast.</td></tr>
+                            <tr><td>We</td><td>are</td><td class="highlight">We're</td><td onclick="speak('We are friends. We\'re friends.')" style="cursor:pointer;"><i class="fas fa-volume-up" style="color:var(--oe-sky)"></i> We're friends.</td></tr>
+                            <tr><td>You</td><td>are</td><td class="highlight">You're</td><td onclick="speak('You are late. You\'re late.')" style="cursor:pointer;"><i class="fas fa-volume-up" style="color:var(--oe-sky)"></i> You're late.</td></tr>
+                            <tr><td>They</td><td>are</td><td class="highlight">They're</td><td onclick="speak('They are here. They\'re here.')" style="cursor:pointer;"><i class="fas fa-volume-up" style="color:var(--oe-sky)"></i> They're here.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            <div id="negative" class="section">
-                <h2>Forma Negativa</h2>
-                <p>Para negar, simplemente agregamos la palabra <strong>NOT</strong> después del verbo. También existen contracciones muy comunes.</p>
+            <div id="negative" class="lesson-module">
+                <div class="section-header">
+                    <h2 class="section-title">La Regla del NOT</h2>
+                    <p class="section-desc">Negación simple y directa.</p>
+                </div>
+
+                <div class="card" style="border-left: 5px solid var(--oe-sky);">
+                    <h3><i class="fas fa-exclamation-circle"></i> Regla de Oro</h3>
+                    <p>Nunca uses "don't" con el verbo To Be. Solo agrega <strong>NOT</strong> después del verbo.</p>
+                    <div style="background:var(--bg-offwhite); padding:15px; border-radius:10px; font-family:'Lora', serif; font-size:1.2rem;">
+                        She is <span style="color:var(--oe-cyan); font-weight:700;">not</span> sad.
+                    </div>
+                </div>
+
+                <h3>Contracciones Negativas</h3>
+                <div class="info-grid">
+                    <div class="card">
+                        <h4>"Aren't" (Are not)</h4>
+                        <div class="audio-strip">
+                            <div class="text-content"><span class="en">You aren't ready.</span></div>
+                            <button class="btn-play" onclick="speak('You aren\'t ready')"><i class="fas fa-play"></i></button>
+                        </div>
+                        <div class="audio-strip">
+                            <div class="text-content"><span class="en">They aren't brothers.</span></div>
+                            <button class="btn-play" onclick="speak('They aren\'t brothers')"><i class="fas fa-play"></i></button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h4>"Isn't" (Is not)</h4>
+                        <div class="audio-strip">
+                            <div class="text-content"><span class="en">He isn't my boss.</span></div>
+                            <button class="btn-play" onclick="speak('He isn\'t my boss')"><i class="fas fa-play"></i></button>
+                        </div>
+                        <div class="audio-strip">
+                            <div class="text-content"><span class="en">It isn't expensive.</span></div>
+                            <button class="btn-play" onclick="speak('It isn\'t expensive')"><i class="fas fa-play"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <p style="font-size:0.9rem; color:#64748b;">*Nota: "Am not" no tiene contracción estándar como "amn't". Se dice "I'm not".</p>
+            </div>
+
+            <div id="questions" class="lesson-module">
+                <div class="section-header">
+                    <h2 class="section-title">El Intercambio (Swap)</h2>
+                    <p class="section-desc">Cómo formular preguntas sin auxiliares extra.</p>
+                </div>
+
+                <div style="display:flex; align-items:center; justify-content:center; gap:20px; background:white; padding:2rem; border-radius:20px; border:1px solid var(--border-light); margin-bottom:2rem;">
+                    <div style="text-align:center;">
+                        <span style="display:block; font-size:0.8rem; color:#94a3b8; margin-bottom:5px;">Afirmación</span>
+                        <div style="font-size:1.5rem; font-weight:700; color:var(--oe-navy);">She is</div>
+                    </div>
+                    <i class="fas fa-exchange-alt" style="font-size:2rem; color:var(--oe-sky);"></i>
+                    <div style="text-align:center;">
+                        <span style="display:block; font-size:0.8rem; color:#94a3b8; margin-bottom:5px;">Pregunta</span>
+                        <div style="font-size:1.5rem; font-weight:700; color:var(--oe-cyan);">Is she?</div>
+                    </div>
+                </div>
+
+                <h3>Wh- Questions (Preguntas de Información)</h3>
+                <p>Las palabras interrogativas (What, Where, Who) van al principio absoluto, antes del verbo To Be.</p>
                 
-                <div class="card-grid">
-                    <div class="info-card">
-                        <h3>I am not</h3>
-                        <p>¡Ojo! "Am" no se contrae con "not". Solo se contrae con "I".</p>
-                        <div class="example-box">
-                            <div><span class="eng-text">I'm not hungry.</span></div>
-                            <button class="btn-audio" onclick="speak('I am not hungry')"><i class="fas fa-volume-up"></i></button>
-                        </div>
-                    </div>
-                    <div class="info-card">
-                        <h3>Is not (Isn't)</h3>
-                        <p>Usado para He, She, It.</p>
-                        <div class="example-box">
-                            <div><span class="eng-text">She isn't ready.</span></div>
-                            <button class="btn-audio" onclick="speak('She isn\'t ready')"><i class="fas fa-volume-up"></i></button>
-                        </div>
-                    </div>
-                    <div class="info-card">
-                        <h3>Are not (Aren't)</h3>
-                        <p>Usado para You, We, They.</p>
-                        <div class="example-box">
-                            <div><span class="eng-text">They aren't home.</span></div>
-                            <button class="btn-audio" onclick="speak('They aren\'t home')"><i class="fas fa-volume-up"></i></button>
-                        </div>
-                    </div>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th width="15%">Wh- Word</th>
+                            <th width="15%">To Be</th>
+                            <th>Sujeto + Comp?</th>
+                            <th>Audio</th>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Where</td><td>are</td><td>you from?</td>
+                            <td><button class="btn-play" onclick="speak('Where are you from?')"><i class="fas fa-play"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Who</td><td>is</td><td>that man?</td>
+                            <td><button class="btn-play" onclick="speak('Who is that man?')"><i class="fas fa-play"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">How old</td><td>are</td><td>your parents?</td>
+                            <td><button class="btn-play" onclick="speak('How old are your parents?')"><i class="fas fa-play"></i></button></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
 
-            <div id="interrogative" class="section">
-                <h2>Preguntas (Yes/No & Wh-)</h2>
-                <p>La magia del verbo To Be es que <strong>no necesita auxiliares</strong> (como Do/Does). Para preguntar, simplemente intercambia el orden del Sujeto y el Verbo.</p>
+            <div id="short" class="lesson-module">
+                <div class="section-header">
+                    <h2 class="section-title">Respuestas Cortas</h2>
+                    <p class="section-desc">No digas solo "Yes" o "No". Es descortés.</p>
+                </div>
                 
-                <div style="background: var(--contrast); padding: 2rem; border-radius: 15px; text-align: center; margin-bottom: 2rem;">
-                    <h3 style="margin-top:0;">La Regla del Intercambio</h3>
-                    <p style="font-size: 1.5rem; font-weight: bold; color: var(--titles);">
-                        You <span style="color:var(--nav-btn)">are</span> happy &rarr; <span style="color:var(--nav-btn)">Are</span> you happy?
-                    </p>
-                </div>
+                <p>En inglés formal y conversacional, repetimos el sujeto y el verbo To Be para confirmar o negar.</p>
 
-                <h3>Wh- Questions (Información)</h3>
-                <p>Si usas palabras como <em>What, Where, Who</em>, estas van al principio absoluto.</p>
-                
-                <div class="example-box">
-                    <div><span class="eng-text">Where are you from?</span><span class="span-text">¿De dónde eres?</span></div>
-                    <button class="btn-audio" onclick="speak('Where are you from?')"><i class="fas fa-volume-up"></i></button>
-                </div>
-                <div class="example-box">
-                    <div><span class="eng-text">Who is she?</span><span class="span-text">¿Quién es ella?</span></div>
-                    <button class="btn-audio" onclick="speak('Who is she?')"><i class="fas fa-volume-up"></i></button>
-                </div>
-                <div class="example-box">
-                    <div><span class="eng-text">Why are they sad?</span><span class="span-text">¿Por qué están tristes?</span></div>
-                    <button class="btn-audio" onclick="speak('Why are they sad?')"><i class="fas fa-volume-up"></i></button>
-                </div>
-            </div>
-
-            <div id="uses" class="section">
-                <h2>Usos Especiales del To Be</h2>
-                <p>Hay situaciones donde el inglés usa "To Be" pero el español usa "Tener". ¡Cuidado con estos errores comunes!</p>
-
-                <div class="card-grid">
-                    <div class="info-card" style="border-top-color: var(--error);">
-                        <i class="fas fa-birthday-cake fa-2x" style="color:var(--error); margin-bottom:15px;"></i>
-                        <h3>La Edad (Age)</h3>
-                        <p>En inglés la edad se <strong>es</strong>, no se tiene.</p>
-                        <div class="example-box">
-                            <div>
-                                <span class="eng-text">I am 25 years old.</span>
-                                <span class="span-text" style="color:var(--error)">NO: I have 25 years.</span>
-                            </div>
-                            <button class="btn-audio" onclick="speak('I am 25 years old')"><i class="fas fa-volume-up"></i></button>
+                <div class="info-grid">
+                    <div class="card" style="border-top: 4px solid var(--oe-royal);">
+                        <h4 style="color:var(--oe-royal);">Question: Are you happy?</h4>
+                        <ul style="list-style:none; padding:0; margin-top:1rem;">
+                            <li style="margin-bottom:10px;"><i class="fas fa-check" style="color:green; margin-right:10px;"></i> <strong>Yes, I am.</strong> (Correcto)</li>
+                            <li style="margin-bottom:10px; color:#94a3b8;"><i class="fas fa-times" style="margin-right:10px;"></i> Yes, I'm. (Incorrecto - No contraer al final)</li>
+                            <li><i class="fas fa-times" style="color:red; margin-right:10px;"></i> <strong>No, I'm not.</strong> (Negativo)</li>
+                        </ul>
+                        <div style="margin-top:15px; border-top:1px solid var(--border-light); padding-top:10px;">
+                            <button class="btn-play" onclick="speak('Are you happy? Yes, I am. No, I am not.')"><i class="fas fa-volume-up"></i> Escuchar diálogo</button>
                         </div>
                     </div>
 
-                    <div class="info-card" style="border-top-color: var(--error);">
-                        <i class="fas fa-temperature-high fa-2x" style="color:var(--error); margin-bottom:15px;"></i>
-                        <h3>Sensaciones (Hot/Cold/Hungry)</h3>
-                        <p>Tener frío, calor, hambre o sed se expresa con To Be.</p>
-                        <div class="example-box">
-                            <div>
-                                <span class="eng-text">I am hungry.</span>
-                                <span class="span-text">Tengo hambre (Literal: Estoy hambriento).</span>
-                            </div>
-                            <button class="btn-audio" onclick="speak('I am hungry')"><i class="fas fa-volume-up"></i></button>
+                    <div class="card" style="border-top: 4px solid var(--oe-royal);">
+                        <h4 style="color:var(--oe-royal);">Question: Is she a doctor?</h4>
+                        <ul style="list-style:none; padding:0; margin-top:1rem;">
+                            <li style="margin-bottom:10px;"><i class="fas fa-check" style="color:green; margin-right:10px;"></i> <strong>Yes, she is.</strong></li>
+                            <li><i class="fas fa-times" style="color:red; margin-right:10px;"></i> <strong>No, she isn't.</strong></li>
+                        </ul>
+                        <div style="margin-top:15px; border-top:1px solid var(--border-light); padding-top:10px;">
+                            <button class="btn-play" onclick="speak('Is she a doctor? Yes, she is. No, she isn\'t.')"><i class="fas fa-volume-up"></i> Escuchar diálogo</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-        </div>
+            <div id="uses" class="lesson-module">
+                <div class="section-header">
+                    <h2 class="section-title">Usos Especiales</h2>
+                    <p class="section-desc">Donde el inglés y el español no coinciden.</p>
+                </div>
 
-        <footer>
-            <p>&copy; 2026 One English School. Todos los derechos reservados.</p>
-            <span class="license">Licensed under GNU General Public License v3.0</span>
+                <div class="card" style="margin-bottom:1.5rem;">
+                    <div style="display:flex; align-items:center; gap:15px; margin-bottom:10px;">
+                        <i class="fas fa-birthday-cake" style="font-size:1.5rem; color:#f59e0b;"></i>
+                        <h3 style="margin:0;">Age (La Edad)</h3>
+                    </div>
+                    <p><strong>Error Común:</strong> En español decimos "Tengo 20 años" (Have). En inglés decimos "Soy 20 años viejo" (Be).</p>
+                    <div class="audio-strip" style="background:#fffbeb; border-color:#fcd34d;">
+                        <div class="text-content">
+                            <span class="en">I am 25 years old.</span>
+                            <span class="es" style="color:#b45309;">(Correcto)</span>
+                        </div>
+                        <button class="btn-play" onclick="speak('I am 25 years old')"><i class="fas fa-play"></i></button>
+                    </div>
+                    <div style="font-size:0.9rem; color:#ef4444; text-decoration:line-through; margin-left:20px;">I have 25 years.</div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="card">
+                        <h4><i class="fas fa-cloud-sun"></i> Weather</h4>
+                        <p>Para el clima, el sujeto siempre es <strong>It</strong>.</p>
+                        <div class="audio-strip"><span class="en">It is sunny.</span> <button class="btn-play" onclick="speak('It is sunny')"><i class="fas fa-play"></i></button></div>
+                        <div class="audio-strip"><span class="en">It is cold today.</span> <button class="btn-play" onclick="speak('It is cold today')"><i class="fas fa-play"></i></button></div>
+                    </div>
+                    <div class="card">
+                        <h4><i class="fas fa-utensils"></i> Physical States</h4>
+                        <p>Hambre, sed, miedo, calor. Se usa <strong>To Be</strong>.</p>
+                        <div class="audio-strip"><span class="en">I am hungry.</span> <button class="btn-play" onclick="speak('I am hungry')"><i class="fas fa-play"></i></button></div>
+                        <div class="audio-strip"><span class="en">Are you thirsty?</span> <button class="btn-play" onclick="speak('Are you thirsty?')"><i class="fas fa-play"></i></button></div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <footer class="app-footer">
+            <span class="footer-logo">ONE ENGLISH</span>
+            <p class="footer-info">Excellence in English Education since 2020.</p>
+            <div class="legal-strip">
+                <span>&copy; 2026 One English School</span>
+                <span>GNU GPL v3.0 License</span>
+                <span>Privacy Policy</span>
+            </div>
         </footer>
 
-    </div>
-
-    <script>
-        // --- TEXT TO SPEECH ENGINE ---
+    </div> <script>
+        /* ==========================================================================
+           LOGIC ENGINE (V2.0)
+           ========================================================================== */
+        
+        // --- 1. AUDIO ENGINE (Browser TTS) ---
         function speak(text) {
             if ('speechSynthesis' in window) {
-                // Cancelar cualquier audio previo
-                window.speechSynthesis.cancel();
-                
+                window.speechSynthesis.cancel(); // Reset
                 const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'en-US'; // Inglés Americano
-                utterance.rate = 0.9;     // Velocidad un poco más pausada para estudiantes
-                utterance.pitch = 1;
-                
+                utterance.lang = 'en-US';
+                utterance.rate = 0.85; // Slowed for clarity
                 window.speechSynthesis.speak(utterance);
             } else {
-                alert("Tu navegador no soporta la función de audio.");
+                alert("Audio not supported in this browser.");
             }
         }
 
-        // --- LOGIN LOGIC ---
-        function attemptLogin() {
-            const user = document.getElementById('username').value;
-            const pass = document.getElementById('password').value;
-            const errorMsg = document.getElementById('login-error');
-            const overlay = document.getElementById('login-overlay');
-            const app = document.getElementById('app-container');
+        // --- 2. AUTHENTICATION LOGIC ---
+        function attemptLogin(e) {
+            e.preventDefault(); // Prevent form reload
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
+            const overlay = document.getElementById('portal-overlay');
+            const lms = document.getElementById('lms-container');
+            const msg = document.getElementById('login-msg');
 
-            if (user === "1englishdemo" && pass === "1english2026") {
-                // Efecto de desvanecimiento
+            // Hardcoded Credentials
+            if (u === "1englishdemo" && p === "1english2026") {
+                // Success Animation
                 overlay.style.opacity = '0';
                 setTimeout(() => {
                     overlay.style.display = 'none';
-                    app.style.display = 'block';
-                    // Pequeño delay para permitir que el display block renderice antes de la opacidad
-                    setTimeout(() => {
-                        app.style.opacity = '1';
-                    }, 50);
-                }, 500);
+                    lms.style.display = 'block';
+                    // Trigger reflow/animation
+                    setTimeout(() => lms.style.opacity = '1', 50);
+                }, 600);
             } else {
-                errorMsg.style.display = 'block';
-                // Animación simple de error (shake)
-                document.querySelector('.login-box').animate([
+                // Error Animation
+                msg.style.display = 'block';
+                const card = document.querySelector('.login-card');
+                card.animate([
                     { transform: 'translateX(0)' },
                     { transform: 'translateX(-10px)' },
                     { transform: 'translateX(10px)' },
                     { transform: 'translateX(0)' }
                 ], { duration: 300 });
             }
+            return false;
         }
 
-        // --- TAB NAVIGATION ---
-        function openTab(tabId) {
-            // Ocultar todas las secciones
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(sec => sec.classList.remove('active'));
-
-            // Desactivar botones
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-
-            // Mostrar sección seleccionada
+        // --- 3. NAVIGATION ENGINE ---
+        function switchTab(tabId, btnElement) {
+            // Content Toggle
+            document.querySelectorAll('.lesson-module').forEach(el => el.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
-            
-            // Activar botón (buscando por el onclick que coincida)
-            event.target.classList.add('active');
-            
-            // Scroll suave al inicio del contenido
-            document.querySelector('.content-area').scrollIntoView({ behavior: 'smooth' });
+
+            // Button State
+            document.querySelectorAll('.tab-item').forEach(el => el.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            // Scroll Adjustment
+            window.scrollTo({ top: 400, behavior: 'smooth' });
         }
 
-        // --- ENTER KEY FOR LOGIN ---
-        document.getElementById("password").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                attemptLogin();
+        // --- 4. SETTINGS ENGINE ---
+        function toggleSettings() {
+            const panel = document.getElementById('settings-modal');
+            panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function adjustFont(val) {
+            document.body.style.fontSize = val + 'px';
+        }
+
+        // Close settings when clicking outside
+        document.addEventListener('click', function(event) {
+            const panel = document.getElementById('settings-modal');
+            const btn = document.querySelector('.settings-btn');
+            if (panel.style.display === 'block' && !panel.contains(event.target) && !btn.contains(event.target)) {
+                panel.style.display = 'none';
             }
         });
+
     </script>
 </body>
 </html>
