@@ -4,563 +4,722 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#2C4A84">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Master Class: Verb To Be | One English</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Verb To Be Mastery | One English</title>
     
     <link rel="icon" href="https://drive.google.com/uc?export=view&id=10s6xhtE73EiO97ePKbnAsXuTP5RkvnTB" type="image/png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
         /* ==========================================================================
-           1. ONE ENGLISH "GLASS" DESIGN SYSTEM
+           1. CORE DESIGN SYSTEM (TITANIUM PALETTE)
            ========================================================================== */
         :root {
-            /* --- CORPORATE PALETTE --- */
-            --navy: #2C4A84;       /* Base Text / Strong Headers */
-            --royal: #2F4F8F;      /* Secondary Elements */
-            --cyan: #2AA6C4;       /* Primary Highlights */
-            --sky: #3BB6D6;        /* Interactive Elements */
+            /* --- Corporate Identity --- */
+            --oe-navy: #2C4A84;       /* Brand Primary */
+            --oe-royal: #2F4F8F;      /* Secondary */
+            --oe-cyan: #2AA6C4;       /* Highlights */
+            --oe-sky: #3BB6D6;        /* Accents */
             
-            /* --- NEUTRALS & SURFACES --- */
-            --bg-app: #F0F4F8;     /* Fondo General */
-            --white: #FFFFFF;
+            /* --- Surfaces (Light Mode) --- */
+            --bg-body: #F8FAFC;       /* Slate 50 */
+            --bg-card: #FFFFFF;       /* White */
+            --bg-sidebar: #FFFFFF;
+            --bg-input: #F1F5F9;      /* Slate 100 */
             
-            /* --- GLASSMORPHISM VARIABLES --- */
-            --glass-bg: rgba(255, 255, 255, 0.85);
-            --glass-border: rgba(255, 255, 255, 0.6);
-            --glass-blur: blur(12px);
-            --glass-shadow: 0 8px 32px 0 rgba(44, 74, 132, 0.1);
+            /* --- Typography (Light Mode) --- */
+            --text-main: #1E293B;     /* Slate 800 */
+            --text-body: #475569;     /* Slate 600 */
+            --text-muted: #94A3B8;    /* Slate 400 */
+            --text-inverse: #FFFFFF;
             
-            /* --- SEMANTIC --- */
-            --error: #ef4444;
-            --success: #10b981;
-            --warning: #f59e0b;
+            /* --- Semantic Colors --- */
+            --success: #10B981;       /* Emerald */
+            --success-bg: #ECFDF5;
+            --error: #EF4444;         /* Red */
+            --error-bg: #FEF2F2;
+            --warning: #F59E0B;       /* Amber */
+            --warning-bg: #FFFBEB;
             
-            /* --- PHYSICS --- */
-            --radius-xl: 24px;
+            /* --- UI Physics --- */
+            --radius-sm: 8px;
             --radius-md: 16px;
-            --trans-speed: 0.3s ease;
+            --radius-lg: 24px;
+            --radius-full: 9999px;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(44, 74, 132, 0.1), 0 4px 6px -2px rgba(44, 74, 132, 0.05);
+            --shadow-glow: 0 0 20px rgba(42, 166, 196, 0.3);
+            
+            --trans-fast: 0.2s ease;
+            --trans-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* --- GLOBAL RESET --- */
+        /* --- Dark Mode Overrides (High Contrast AAA) --- */
+        [data-theme="dark"] {
+            --bg-body: #0F172A;       /* Slate 900 */
+            --bg-card: #1E293B;       /* Slate 800 */
+            --bg-sidebar: #020617;    /* Slate 950 */
+            --bg-input: #334155;      /* Slate 700 */
+            
+            --text-main: #F8FAFC;     /* Slate 50 */
+            --text-body: #CBD5E1;     /* Slate 300 */
+            --text-muted: #64748B;    /* Slate 500 */
+            
+            --oe-navy: #60A5FA;       /* Light Blue for visibility */
+            --oe-royal: #3B82F6;
+            
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ==========================================================================
+           2. GLOBAL RESET & BASE
+           ========================================================================== */
         * { box-sizing: border-box; margin: 0; padding: 0; outline: none; -webkit-tap-highlight-color: transparent; }
+        
+        html { font-size: 16px; scroll-behavior: smooth; height: 100%; }
         
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-app);
-            background-image: radial-gradient(at 0% 0%, rgba(42, 166, 196, 0.1) 0px, transparent 50%),
-                              radial-gradient(at 100% 100%, rgba(44, 74, 132, 0.1) 0px, transparent 50%);
-            background-attachment: fixed;
-            color: var(--navy);
+            background-color: var(--bg-body);
+            color: var(--text-main);
             line-height: 1.6;
-            font-size: 16px;
-            overflow-x: hidden;
-            min-height: 100vh;
+            height: 100%;
+            overflow: hidden; /* App-like structure */
+            display: flex;
+            flex-direction: column;
+            transition: background-color var(--trans-smooth), color var(--trans-smooth);
         }
 
-        /* --- TYPOGRAPHY --- */
-        h1, h2, h3 { font-family: 'Poppins', sans-serif; font-weight: 700; color: var(--navy); letter-spacing: -0.5px; }
-        .serif-text { font-family: 'Lora', serif; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { display: block; max-width: 100%; }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--oe-cyan); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--oe-navy); }
+
+        /* Typography Utilities */
+        .h1, .h2, .h3 { font-family: 'Lora', serif; font-weight: 700; color: var(--oe-navy); line-height: 1.2; }
+        [data-theme="dark"] .h1, [data-theme="dark"] .h2, [data-theme="dark"] .h3 { color: var(--text-main); }
         
-        p { color: #475569; margin-bottom: 1.2rem; font-size: 0.95rem; }
-        strong { color: var(--royal); font-weight: 600; }
+        .text-gradient {
+            background: linear-gradient(135deg, var(--oe-navy), var(--oe-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
         /* ==========================================================================
-           2. LOGIN PORTAL (GLASS STYLE)
+           3. LOGIN PORTAL (SECURE GATE)
            ========================================================================== */
         #portal-layer {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 9999;
-            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-body); z-index: 9999;
             display: flex; align-items: center; justify-content: center;
             transition: opacity 0.6s ease, visibility 0.6s;
         }
 
-        .glass-card-login {
-            width: 90%; max-width: 400px; padding: 3rem 2rem;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        .login-wrapper {
+            width: 90%; max-width: 400px;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            padding: 3rem 2rem;
             text-align: center;
-            position: relative; overflow: hidden;
-        }
-        
-        /* Decorative Blob */
-        .glass-card-login::before {
-            content: ''; position: absolute; top: -50px; right: -50px; width: 150px; height: 150px;
-            background: var(--cyan); filter: blur(60px); opacity: 0.4; z-index: -1;
+            border-top: 5px solid var(--oe-cyan);
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .login-logo { width: 90px; height: 90px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 1.5rem; object-fit: cover; }
-        
-        .input-floating {
-            position: relative; margin-bottom: 1.5rem; text-align: left;
+        .brand-avatar-lg {
+            width: 80px; height: 80px; margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--oe-navy), var(--oe-royal));
+            border-radius: 20px; color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem; box-shadow: var(--shadow-glow);
+        }
+
+        .input-group { position: relative; margin-bottom: 1.5rem; text-align: left; }
+        .input-label {
+            font-size: 0.8rem; font-weight: 700; color: var(--oe-royal);
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; display: block;
         }
         .input-field {
-            width: 100%; padding: 16px 20px; border-radius: 15px; border: 2px solid transparent;
-            background: white; font-size: 1rem; color: var(--navy); transition: var(--trans-speed);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03); font-family: 'Poppins';
+            width: 100%; padding: 16px; border-radius: 12px;
+            border: 2px solid var(--bg-input); background: var(--bg-input);
+            font-size: 1rem; color: var(--text-main); transition: var(--trans-fast);
+            font-family: 'Poppins', sans-serif;
         }
-        .input-field:focus { border-color: var(--sky); box-shadow: 0 4px 20px rgba(59, 182, 214, 0.2); transform: translateY(-2px); }
-        .input-label {
-            position: absolute; top: -10px; left: 15px; background: var(--sky); color: white;
-            padding: 2px 10px; border-radius: 10px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
-        }
+        .input-field:focus { border-color: var(--oe-cyan); background: var(--bg-card); box-shadow: 0 0 0 4px rgba(42, 166, 196, 0.15); }
 
-        .btn-login {
-            width: 100%; padding: 18px; border-radius: 15px; border: none;
-            background: linear-gradient(90deg, var(--navy), var(--royal));
+        .btn-primary {
+            width: 100%; padding: 18px; border: none; border-radius: 14px;
+            background: linear-gradient(90deg, var(--oe-royal), var(--oe-cyan));
             color: white; font-weight: 700; font-size: 1.1rem; cursor: pointer;
-            box-shadow: 0 10px 25px rgba(44, 74, 132, 0.3); transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(44, 74, 132, 0.2); transition: var(--trans-fast);
+            display: flex; align-items: center; justify-content: center; gap: 10px;
         }
-        .btn-login:active { transform: scale(0.98); }
+        .btn-primary:active { transform: scale(0.98); }
+        .btn-primary:hover { box-shadow: 0 15px 30px rgba(44, 74, 132, 0.3); transform: translateY(-2px); }
+
+        .error-toast {
+            background: var(--error-bg); color: var(--error); padding: 12px;
+            border-radius: 10px; margin-top: 20px; font-size: 0.9rem; font-weight: 600;
+            display: none; align-items: center; justify-content: center; gap: 8px;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
 
         /* ==========================================================================
-           3. APP INTERFACE (MOBILE OPTIMIZED)
+           4. APP SHELL (NAVIGATION & LAYOUT)
            ========================================================================== */
-        #lms-root { display: none; opacity: 0; transition: opacity 1s ease; padding-bottom: 100px; }
+        #app-root { display: none; height: 100%; display: flex; flex-direction: column; opacity: 0; transition: opacity 1s ease; }
 
         /* --- Header --- */
         .app-header {
-            position: sticky; top: 0; z-index: 1000;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            padding-top: env(safe-area-inset-top);
-        }
-        .header-inner {
+            height: 70px; background: var(--bg-card); border-bottom: 1px solid rgba(0,0,0,0.05);
             display: flex; align-items: center; justify-content: space-between;
-            padding: 15px 20px; max-width: 800px; margin: 0 auto;
+            padding: 0 1.5rem; z-index: 100; flex-shrink: 0;
         }
-        .app-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.2rem; color: var(--navy); }
-        .app-brand img { width: 35px; height: 35px; border-radius: 8px; }
-        
-        /* --- Banner Hero --- */
-        .hero-banner {
-            width: 100%; height: 220px; position: relative; overflow: hidden;
-            border-bottom-left-radius: 30px; border-bottom-right-radius: 30px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1); margin-bottom: 20px;
-        }
-        .hero-img { width: 100%; height: 100%; object-fit: cover; }
-        .hero-gradient {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to top, rgba(44, 74, 132, 0.9), transparent);
-            display: flex; flex-direction: column; justify-content: flex-end; padding: 25px;
-        }
-        .hero-tag {
-            background: var(--cyan); color: white; padding: 5px 12px; border-radius: 20px;
-            font-size: 0.7rem; font-weight: 800; text-transform: uppercase; align-self: flex-start; margin-bottom: 10px;
-        }
-        .hero-title { color: white; font-size: 2rem; line-height: 1.1; margin: 0; font-family: 'Lora'; }
+        [data-theme="dark"] .app-header { border-bottom-color: var(--bg-input); }
 
-        /* --- Scrollable Tab Navigation (App Style) --- */
-        .nav-scroller {
-            position: sticky; top: 65px; z-index: 900; background: transparent;
-            padding: 10px 0; overflow-x: auto; -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; margin-bottom: 10px;
-        }
-        .nav-scroller::-webkit-scrollbar { display: none; }
+        .app-logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.2rem; color: var(--oe-navy); }
         
-        .nav-list {
-            display: flex; gap: 12px; padding: 0 20px; width: max-content;
+        /* Fallback Avatar Generator */
+        .img-fallback {
+            width: 40px; height: 40px; border-radius: 10px; background: var(--oe-royal);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; font-weight: 700;
         }
+        .img-loaded { display: none; width: 40px; height: 40px; border-radius: 10px; object-fit: cover; }
+
+        .header-actions { display: flex; align-items: center; gap: 15px; }
+        .theme-toggle {
+            width: 40px; height: 40px; border-radius: 50%; border: none;
+            background: var(--bg-input); color: var(--text-body); cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: var(--trans-fast);
+        }
+        .theme-toggle:hover { background: var(--oe-cyan); color: white; }
+
+        /* --- Tab Navigation (Scrollable) --- */
+        .nav-scroller {
+            background: var(--bg-card); padding: 10px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05); flex-shrink: 0;
+        }
+        .nav-list {
+            display: flex; gap: 12px; padding: 0 1.5rem; overflow-x: auto;
+            scrollbar-width: none; -webkit-overflow-scrolling: touch;
+        }
+        .nav-list::-webkit-scrollbar { display: none; }
+
         .nav-pill {
-            padding: 10px 20px; border-radius: 25px; background: rgba(255,255,255,0.7);
-            border: 1px solid rgba(255,255,255,0.8); backdrop-filter: blur(5px);
-            color: var(--navy); font-weight: 600; font-size: 0.9rem; cursor: pointer;
-            transition: 0.3s; white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            padding: 10px 20px; border-radius: 30px; background: var(--bg-input);
+            color: var(--text-body); font-weight: 600; font-size: 0.9rem;
+            white-space: nowrap; cursor: pointer; transition: var(--trans-fast);
+            border: 1px solid transparent;
         }
         .nav-pill.active {
-            background: var(--navy); color: white; border-color: var(--navy);
-            box-shadow: 0 8px 20px rgba(44, 74, 132, 0.3); transform: scale(1.05);
+            background: var(--oe-navy); color: white;
+            box-shadow: 0 4px 12px rgba(44, 74, 132, 0.3); border-color: var(--oe-navy);
+        }
+        [data-theme="dark"] .nav-pill.active { background: var(--oe-sky); color: var(--text-main); }
+
+        /* --- Main Scrollable Area --- */
+        .main-viewport {
+            flex-grow: 1; overflow-y: auto; padding: 2rem 1.5rem 6rem; /* Padding bottom for footer space */
+            background: var(--bg-body); position: relative;
+        }
+        .content-container { max-width: 800px; margin: 0 auto; }
+
+        /* ==========================================================================
+           5. CONTENT MODULES (CARDS & INTERACTIVITY)
+           ========================================================================== */
+        
+        /* Sections Logic */
+        .section-view { display: none; animation: fadeUp 0.5s ease; }
+        .section-view.active { display: block; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Hero Banner */
+        .hero-card {
+            background: linear-gradient(135deg, var(--oe-navy), var(--oe-royal));
+            border-radius: var(--radius-lg); padding: 2.5rem; color: white;
+            margin-bottom: 2.5rem; position: relative; overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        .hero-bg-pattern {
+            position: absolute; top: 0; right: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(circle at 100% 0%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .hero-badge {
+            background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 20px;
+            font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+            backdrop-filter: blur(5px); display: inline-block; margin-bottom: 1rem;
         }
 
-        /* --- Content Container --- */
-        .module-container {
-            max-width: 800px; margin: 0 auto; padding: 0 20px;
+        /* Content Card */
+        .card {
+            background: var(--bg-card); border-radius: var(--radius-lg); padding: 2rem;
+            margin-bottom: 2rem; box-shadow: var(--shadow-md); border: 1px solid rgba(0,0,0,0.03);
+            transition: transform 0.3s;
         }
-        
-        .lesson-slide { display: none; animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-        .lesson-slide.active { display: block; }
-        
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+        [data-theme="dark"] .card { border-color: var(--bg-input); }
 
-        /* --- Glass Cards --- */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border: 1px solid white; border-radius: 24px; padding: 25px; margin-bottom: 25px;
-            box-shadow: var(--glass-shadow); position: relative;
-        }
         .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 1.5rem; }
-        .card-icon-box {
-            width: 50px; height: 50px; background: linear-gradient(135deg, var(--sky), var(--cyan));
-            border-radius: 14px; display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 1.5rem; box-shadow: 0 8px 15px rgba(59, 182, 214, 0.3);
+        .icon-box {
+            width: 50px; height: 50px; border-radius: 14px;
+            background: var(--bg-input); color: var(--oe-cyan);
+            display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
         }
 
-        /* --- Audio Examples UI --- */
+        /* Audio Player Rows */
         .audio-row {
             display: flex; align-items: center; justify-content: space-between;
-            background: white; padding: 15px; border-radius: 16px; margin-bottom: 12px;
-            border: 1px solid rgba(0,0,0,0.05); transition: 0.2s;
+            background: var(--bg-body); padding: 12px 18px; border-radius: 12px;
+            margin-bottom: 10px; border: 1px solid transparent; transition: 0.2s;
         }
-        .audio-row:active { transform: scale(0.98); background: #f8fafc; }
+        .audio-row:hover { border-color: var(--oe-sky); background: var(--bg-card); }
         
-        .txt-en { font-family: 'Lora'; font-weight: 600; font-size: 1.1rem; color: var(--navy); display: block; }
-        .txt-es { font-size: 0.85rem; color: #94a3b8; font-style: italic; }
+        .txt-en { font-weight: 700; color: var(--text-main); display: block; font-family: 'Lora', serif; font-size: 1.05rem; }
+        .txt-es { font-size: 0.85rem; color: var(--text-muted); font-style: italic; }
         
         .btn-play {
-            width: 44px; height: 44px; border-radius: 50%; border: none;
-            background: var(--bg-app); color: var(--navy);
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); cursor: pointer;
+            width: 36px; height: 36px; border-radius: 50%; border: none;
+            background: var(--bg-card); color: var(--oe-navy); box-shadow: var(--shadow-sm);
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: 0.2s;
         }
-        .btn-play:active { background: var(--cyan); color: white; }
+        .btn-play:active { background: var(--oe-cyan); color: white; transform: scale(0.9); }
 
-        /* --- Data Tables Mobile --- */
-        .table-wrap { overflow-x: auto; border-radius: 16px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        table { width: 100%; border-collapse: collapse; min-width: 500px; background: white; }
-        th { background: var(--royal); color: white; padding: 15px; text-align: left; font-size: 0.85rem; }
-        td { padding: 15px; border-bottom: 1px solid #eee; color: #333; }
+        /* Tables */
+        .table-responsive { overflow-x: auto; border-radius: 16px; border: 1px solid var(--bg-input); }
+        table { width: 100%; border-collapse: collapse; min-width: 500px; background: var(--bg-card); }
+        th { text-align: left; padding: 15px; background: var(--bg-input); color: var(--text-body); font-size: 0.8rem; text-transform: uppercase; font-weight: 800; }
+        td { padding: 15px; border-bottom: 1px solid var(--bg-input); color: var(--text-main); font-size: 0.95rem; }
         tr:last-child td { border-bottom: none; }
 
+        /* Interactive Exercise (Fill Blanks) */
+        .lab-exercise {
+            background: var(--bg-input); padding: 20px; border-radius: 16px; margin-top: 1rem;
+        }
+        .blank-line {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;
+            font-size: 1.1rem; color: var(--text-main);
+        }
+        .input-blank {
+            background: var(--bg-card); border: 2px solid var(--text-muted); border-radius: 8px;
+            width: 80px; padding: 5px 10px; text-align: center; font-weight: 700; color: var(--oe-navy);
+            outline: none; font-family: inherit;
+        }
+        .input-blank:focus { border-color: var(--oe-cyan); }
+        .input-blank.correct { border-color: var(--success); background: var(--success-bg); color: var(--success); }
+        .input-blank.wrong { border-color: var(--error); background: var(--error-bg); animation: shake 0.4s; }
+
+        @keyframes shake { 0%,100% {transform:translateX(0)} 25% {transform:translateX(-5px)} 75% {transform:translateX(5px)} }
+
+        /* Quiz Module */
+        .quiz-container { display: none; }
+        .quiz-question { font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; color: var(--text-main); }
+        .quiz-options { display: grid; gap: 10px; }
+        .quiz-btn {
+            padding: 15px; border: 2px solid var(--bg-input); background: var(--bg-card);
+            border-radius: 12px; text-align: left; font-weight: 600; color: var(--text-body);
+            cursor: pointer; transition: 0.2s;
+        }
+        .quiz-btn:hover { border-color: var(--oe-sky); color: var(--oe-navy); }
+        
+        .result-box { text-align: center; padding: 2rem; display: none; }
+        .score-circle {
+            width: 100px; height: 100px; border-radius: 50%; border: 5px solid var(--oe-cyan);
+            display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;
+            font-size: 2rem; font-weight: 800; color: var(--oe-navy);
+        }
+
         /* --- Footer --- */
-        .app-footer {
-            text-align: center; padding: 40px 20px 20px; color: #64748b; font-size: 0.8rem;
+        .legal-footer {
+            text-align: center; padding: 3rem 1rem; color: var(--text-muted); font-size: 0.8rem;
+            border-top: 1px solid var(--bg-input); margin-top: 3rem;
         }
-        .license-badge {
-            display: inline-block; padding: 5px 10px; border: 1px solid #cbd5e1; border-radius: 10px;
-            margin-top: 10px; font-family: monospace;
+        .gnu-badge {
+            display: inline-block; padding: 4px 8px; border: 1px solid var(--text-muted);
+            border-radius: 6px; margin-top: 10px; font-family: monospace;
         }
-
-        /* --- Utilities --- */
-        .highlight-box {
-            background: #ecfeff; border-left: 4px solid var(--cyan); padding: 15px; border-radius: 8px; margin: 15px 0;
-        }
-        .error-box {
-            background: #fef2f2; border-left: 4px solid var(--error); padding: 15px; border-radius: 8px; margin: 15px 0;
-        }
-        .chip {
-            display: inline-block; padding: 4px 10px; background: var(--navy); color: white; 
-            border-radius: 6px; font-size: 0.75rem; font-weight: 700; margin-right: 5px;
-        }
-
-        /* Animation Classes */
-        .shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; }
-        @keyframes shake { 10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
 
     </style>
 </head>
 <body>
 
     <div id="portal-layer">
-        <div class="glass-card-login">
-            <img src="https://drive.google.com/uc?export=view&id=10s6xhtE73EiO97ePKbnAsXuTP5RkvnTB" class="login-logo" alt="OE">
-            <h2 style="margin-bottom: 5px;">One English</h2>
-            <p style="margin-bottom: 2rem;">Student Learning Suite</p>
-            
-            <div class="input-floating">
-                <span class="input-label">Usuario</span>
-                <input type="text" id="user" class="input-field" placeholder="ID de estudiante" autocomplete="off">
+        <div class="login-wrapper">
+            <div class="brand-avatar-lg">
+                <i class="fas fa-graduation-cap"></i>
             </div>
-            <div class="input-floating">
-                <span class="input-label">Contraseña</span>
-                <input type="password" id="pass" class="input-field" placeholder="••••••••">
-            </div>
+            <h1 class="h2" style="margin-bottom: 5px;">Student Portal</h1>
+            <p style="margin-bottom: 2rem; color: var(--text-muted);">One English System v4.0</p>
             
-            <button class="btn-login" onclick="login()">INGRESAR AHORA</button>
-            <p id="error-txt" style="color:var(--error); font-size:0.8rem; margin-top:15px; display:none;"><i class="fas fa-lock"></i> Acceso denegado.</p>
+            <form onsubmit="return handleLogin(event)">
+                <div class="input-group">
+                    <span class="input-label">Usuario</span>
+                    <input type="text" id="user" class="input-field" placeholder="ID de estudiante" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <span class="input-label">Contraseña</span>
+                    <input type="password" id="pass" class="input-field" placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-primary">
+                    ENTRAR AL CURSO <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+            
+            <div id="error-msg" class="error-toast">
+                <i class="fas fa-times-circle"></i> Credenciales inválidas.
+            </div>
         </div>
     </div>
 
-    <div id="lms-root">
+    <div id="app-root" style="display:none;">
         
         <header class="app-header">
-            <div class="header-inner">
-                <div class="app-brand">
-                    <img src="https://drive.google.com/uc?export=view&id=10s6xhtE73EiO97ePKbnAsXuTP5RkvnTB" alt="OE">
-                    ONE ENGLISH
+            <div class="app-logo">
+                <div style="width:35px; height:35px; overflow:hidden; border-radius:8px; position:relative;">
+                    <div class="img-fallback">OE</div>
+                    <img src="https://drive.google.com/uc?export=view&id=10s6xhtE73EiO97ePKbnAsXuTP5RkvnTB" 
+                         class="img-loaded" onload="this.style.display='block'; this.previousElementSibling.style.display='none';" 
+                         onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';" alt="Logo">
                 </div>
-                <div style="width:30px; height:30px; background:var(--bg-app); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--navy);">
-                    <i class="fas fa-user"></i>
-                </div>
+                <span>One English</span>
+            </div>
+            
+            <div class="header-actions">
+                <button class="theme-toggle" onclick="toggleTheme()" style="background:none; border:none; color:var(--text-body); font-size:1.2rem; cursor:pointer;">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
             </div>
         </header>
-
-        <div class="hero-banner">
-            <img src="https://drive.google.com/uc?export=view&id=10jdlHtQJLviy5sX2h9W8VfsP4I9tWera" class="hero-img" alt="Class">
-            <div class="hero-gradient">
-                <span class="hero-tag">Grammar Level 1</span>
-                <h1 class="hero-title">Verb To Be<br>Mastery</h1>
-            </div>
-        </div>
 
         <nav class="nav-scroller">
             <div class="nav-list">
                 <div class="nav-pill active" onclick="go(0, this)">1. Introducción</div>
-                <div class="nav-pill" onclick="go(1, this)">2. Los 7 Usos</div>
-                <div class="nav-pill" onclick="go(2, this)">3. Estructura</div>
-                <div class="nav-pill" onclick="go(3, this)">4. Errores Fatales</div>
+                <div class="nav-pill" onclick="go(1, this)">2. Estructura</div>
+                <div class="nav-pill" onclick="go(2, this)">3. Los 7 Usos</div>
+                <div class="nav-pill" onclick="go(3, this)">4. Práctica (Lab)</div>
+                <div class="nav-pill" onclick="go(4, this)">5. Examen Final</div>
             </div>
         </nav>
 
-        <div class="module-container">
+        <div class="main-viewport">
+            <div class="content-container">
 
-            <div class="lesson-slide active" id="sec-0">
-                <div class="glass-card">
-                    <div class="card-header">
-                        <div class="card-icon-box"><i class="fas fa-crown"></i></div>
-                        <div>
-                            <h2 style="font-size:1.3rem; margin:0;">El Rey de los Verbos</h2>
-                            <span style="font-size:0.8rem; color:var(--cyan);">Concepto Clave</span>
+                <div id="sec-0" class="section-view active">
+                    <div class="hero-card">
+                        <div class="hero-bg-pattern"></div>
+                        <span class="hero-badge">Foundations A1</span>
+                        <h1 class="h1" style="color:white; margin-bottom:10px;">The Verb To Be</h1>
+                        <p style="color:rgba(255,255,255,0.9); margin:0;">La piedra angular del idioma inglés. Entiende el ser y el estar.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="icon-box"><i class="fas fa-info-circle"></i></div>
+                            <div>
+                                <h3 class="h3" style="margin:0;">¿Por qué es especial?</h3>
+                                <span style="font-size:0.85rem; color:var(--text-muted);">Concepto Base</span>
+                            </div>
+                        </div>
+                        <p>En español usamos dos verbos: <strong>Ser</strong> (Identidad) y <strong>Estar</strong> (Ubicación/Estado). En inglés, ahorramos energía y usamos solo uno: <strong>To Be</strong>.</p>
+                        <p>Es un verbo "autosuficiente". No necesita auxiliares (como Do/Does) para hacer preguntas o negaciones. Él se manda solo.</p>
+                    </div>
+                </div>
+
+                <div id="sec-1" class="section-view">
+                    <h2 class="h2" style="margin-bottom:20px;">Las 3 Formas (Am, Is, Are)</h2>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="icon-box"><i class="fas fa-table"></i></div>
+                            <h3 class="h3">Afirmativo (+ Contractions)</h3>
+                        </div>
+                        <p>En el inglés real, usamos "contracciones" (Short forms) el 90% del tiempo.</p>
+                        
+                        <div class="table-responsive">
+                            <table>
+                                <tr><th>Person</th><th>Verb</th><th>Short</th><th>Audio</th></tr>
+                                <tr><td>I</td><td>am</td><td><strong>I'm</strong></td><td><button class="btn-play" onclick="speak('I am. I\'m.')"><i class="fas fa-play"></i></button></td></tr>
+                                <tr><td>He</td><td>is</td><td><strong>He's</strong></td><td><button class="btn-play" onclick="speak('He is. He\'s.')"><i class="fas fa-play"></i></button></td></tr>
+                                <tr><td>She</td><td>is</td><td><strong>She's</strong></td><td><button class="btn-play" onclick="speak('She is. She\'s.')"><i class="fas fa-play"></i></button></td></tr>
+                                <tr><td>It</td><td>is</td><td><strong>It's</strong></td><td><button class="btn-play" onclick="speak('It is. It\'s.')"><i class="fas fa-play"></i></button></td></tr>
+                                <tr><td>We</td><td>are</td><td><strong>We're</strong></td><td><button class="btn-play" onclick="speak('We are. We\'re.')"><i class="fas fa-play"></i></button></td></tr>
+                                <tr><td>They</td><td>are</td><td><strong>They're</strong></td><td><button class="btn-play" onclick="speak('They are. They\'re.')"><i class="fas fa-play"></i></button></td></tr>
+                            </table>
                         </div>
                     </div>
-                    <p>Bienvenido. El verbo <strong>To Be</strong> es la base de todo. En español tenemos dos verbos: <em>Ser</em> y <em>Estar</em>. En inglés, solo tenemos uno. Es un verbo "autosuficiente" (no necesita auxiliares).</p>
+
+                    <div class="card" style="border-left: 5px solid var(--oe-royal);">
+                        <h3>La Magia de la Pregunta</h3>
+                        <p>Para preguntar, solo <strong>invierte el orden</strong> (The Swap).</p>
+                        <div style="background:var(--bg-input); padding:20px; border-radius:12px; text-align:center;">
+                            <div style="font-size:1.2rem; font-weight:700; color:var(--text-main);">You are happy.</div>
+                            <i class="fas fa-exchange-alt" style="color:var(--oe-cyan); margin:10px 0; font-size:1.5rem;"></i>
+                            <div style="font-size:1.2rem; font-weight:700; color:var(--oe-navy);">Are you happy?</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="sec-2" class="section-view">
+                    <h2 class="h2" style="margin-bottom:20px;">Enciclopedia de Usos</h2>
                     
-                    <div class="highlight-box">
-                        <strong>💡 Dato Curioso:</strong> Es el verbo más usado en el idioma inglés, apareciendo en el 40% de todas las oraciones básicas.
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="icon-box" style="background:var(--warning-bg); color:var(--warning);"><i class="fas fa-exclamation-triangle"></i></div>
+                            <h3 class="h3">1. Age (Edad) - ¡Cuidado!</h3>
+                        </div>
+                        <p>El error #1 de los latinos. La edad se <strong>ES</strong>, no se tiene.</p>
+                        <div class="audio-row">
+                            <div><span class="txt-en">I am 25 years old.</span><span class="txt-es">Tengo 25 años. (Correcto)</span></div>
+                            <button class="btn-play" onclick="speak('I am 25 years old')"><i class="fas fa-play"></i></button>
+                        </div>
+                        <div style="font-size:0.9rem; color:var(--error); margin-top:5px; text-decoration:line-through;">I have 25 years. (Incorrecto)</div>
                     </div>
-                </div>
-            </div>
 
-            <div class="lesson-slide" id="sec-1">
-                <h3 style="margin-bottom:15px; padding-left:10px;">Enciclopedia de Usos</h3>
-                
-                <div class="glass-card">
-                    <div class="card-header">
-                        <div class="card-icon-box"><i class="fas fa-id-badge"></i></div>
-                        <h3>1. Identidad y Nombre</h3>
+                    <div class="card">
+                        <h3>2. Profession & Identity</h3>
+                        <div class="audio-row">
+                            <div><span class="txt-en">She is a doctor.</span><span class="txt-es">Ella es doctora.</span></div>
+                            <button class="btn-play" onclick="speak('She is a doctor')"><i class="fas fa-play"></i></button>
+                        </div>
                     </div>
-                    <p>Para presentarte o decir quién es alguien.</p>
-                    <div class="audio-row">
-                        <div><span class="txt-en">I am Netza.</span><span class="txt-es">Soy Netza.</span></div>
-                        <button class="btn-play" onclick="speak('I am Netza')"><i class="fas fa-play"></i></button>
-                    </div>
-                </div>
 
-                <div class="glass-card">
-                    <div class="card-header">
-                        <div class="card-icon-box"><i class="fas fa-briefcase"></i></div>
-                        <h3>2. Profesión / Ocupación</h3>
+                    <div class="card">
+                        <h3>3. Feelings (Sentimientos)</h3>
+                        <p>Hambre, sed, miedo, frío... en inglés son estados del ser.</p>
+                        <div class="audio-row">
+                            <div><span class="txt-en">I am hungry.</span><span class="txt-es">Tengo hambre.</span></div>
+                            <button class="btn-play" onclick="speak('I am hungry')"><i class="fas fa-play"></i></button>
+                        </div>
+                        <div class="audio-row">
+                            <div><span class="txt-en">Are you cold?</span><span class="txt-es">¿Tienes frío?</span></div>
+                            <button class="btn-play" onclick="speak('Are you cold?')"><i class="fas fa-play"></i></button>
+                        </div>
                     </div>
-                    <div class="audio-row">
-                        <div><span class="txt-en">She is a doctor.</span><span class="txt-es">Ella es doctora.</span></div>
-                        <button class="btn-play" onclick="speak('She is a doctor')"><i class="fas fa-play"></i></button>
-                    </div>
-                    <div class="audio-row">
-                        <div><span class="txt-en">They are students.</span><span class="txt-es">Ellos son estudiantes.</span></div>
-                        <button class="btn-play" onclick="speak('They are students')"><i class="fas fa-play"></i></button>
-                    </div>
-                </div>
 
-                <div class="glass-card" style="border-left: 5px solid var(--warning);">
-                    <div class="card-header">
-                        <div class="card-icon-box" style="background:var(--warning);"><i class="fas fa-birthday-cake"></i></div>
-                        <h3>3. Edad (¡Cuidado!)</h3>
-                    </div>
-                    <p>En inglés, la edad se <strong>ES</strong>, no se tiene. Nunca uses "Have".</p>
-                    <div class="audio-row">
-                        <div><span class="txt-en">I am 20 years old.</span><span class="txt-es">Tengo 20 años.</span></div>
-                        <button class="btn-play" onclick="speak('I am 20 years old')"><i class="fas fa-play"></i></button>
+                    <div class="card">
+                        <h3>4. Weather (Clima)</h3>
+                        <p>Siempre usa el sujeto <strong>It</strong>.</p>
+                        <div class="audio-row">
+                            <div><span class="txt-en">It is sunny today.</span><span class="txt-es">Está soleado.</span></div>
+                            <button class="btn-play" onclick="speak('It is sunny today')"><i class="fas fa-play"></i></button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="glass-card">
-                    <div class="card-header">
-                        <div class="card-icon-box"><i class="fas fa-smile"></i></div>
-                        <h3>4. Sentimientos y Estado</h3>
-                    </div>
-                    <div class="audio-row">
-                        <div><span class="txt-en">We are happy.</span><span class="txt-es">Estamos felices.</span></div>
-                        <button class="btn-play" onclick="speak('We are happy')"><i class="fas fa-play"></i></button>
-                    </div>
-                    <div class="audio-row">
-                        <div><span class="txt-en">He is tired.</span><span class="txt-es">Él está cansado.</span></div>
-                        <button class="btn-play" onclick="speak('He is tired')"><i class="fas fa-play"></i></button>
-                    </div>
-                </div>
-
-                <div class="glass-card">
-                    <div class="card-header">
-                        <div class="card-icon-box"><i class="fas fa-globe-americas"></i></div>
-                        <h3>5. Nacionalidad y Origen</h3>
-                    </div>
-                    <div class="audio-row">
-                        <div><span class="txt-en">I am from Mexico.</span><span class="txt-es">Soy de México.</span></div>
-                        <button class="btn-play" onclick="speak('I am from Mexico')"><i class="fas fa-play"></i></button>
-                    </div>
-                </div>
-
-                <div class="glass-card">
-                    <div class="card-header">
-                        <div class="card-icon-box"><i class="fas fa-map-marker-alt"></i></div>
-                        <h3>6. Ubicación (Dónde estás)</h3>
-                    </div>
-                    <div class="audio-row">
-                        <div><span class="txt-en">She is at home.</span><span class="txt-es">Ella está en casa.</span></div>
-                        <button class="btn-play" onclick="speak('She is at home')"><i class="fas fa-play"></i></button>
+                <div id="sec-3" class="section-view">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="icon-box" style="background:var(--success-bg); color:var(--success);"><i class="fas fa-flask"></i></div>
+                            <h3 class="h3">Practice Lab</h3>
+                        </div>
+                        <p>Escribe <strong>am</strong>, <strong>is</strong> o <strong>are</strong> para completar.</p>
+                        
+                        <div class="lab-exercise">
+                            <div class="blank-line">
+                                1. She <input type="text" class="input-blank" onblur="checkAnswer(this, 'is')"> my sister.
+                            </div>
+                            <div class="blank-line">
+                                2. They <input type="text" class="input-blank" onblur="checkAnswer(this, 'are')"> at home.
+                            </div>
+                            <div class="blank-line">
+                                3. I <input type="text" class="input-blank" onblur="checkAnswer(this, 'am')"> happy.
+                            </div>
+                            <div class="blank-line">
+                                4. It <input type="text" class="input-blank" onblur="checkAnswer(this, 'is')"> a cat.
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="glass-card">
-                    <div class="card-header">
-                        <div class="card-icon-box"><i class="fas fa-cloud-sun"></i></div>
-                        <h3>7. Clima y Tiempo</h3>
-                    </div>
-                    <p>El sujeto siempre es <strong>It</strong>.</p>
-                    <div class="audio-row">
-                        <div><span class="txt-en">It is sunny today.</span><span class="txt-es">Está soleado.</span></div>
-                        <button class="btn-play" onclick="speak('It is sunny today')"><i class="fas fa-play"></i></button>
-                    </div>
-                </div>
-            </div>
+                <div id="sec-4" class="section-view">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="icon-box"><i class="fas fa-trophy"></i></div>
+                            <h3 class="h3">Final Certification</h3>
+                        </div>
+                        
+                        <div id="quiz-start">
+                            <p>5 Preguntas para demostrar tu dominio. ¿Listo?</p>
+                            <button class="btn-primary" onclick="startQuiz()">COMENZAR EXAMEN</button>
+                        </div>
 
-            <div class="lesson-slide" id="sec-2">
-                <div class="glass-card">
-                    <h3>Afirmativo & Contracciones</h3>
-                    <p>En el inglés real (hablado), casi siempre usamos contracciones.</p>
-                    <div class="table-wrap">
-                        <table>
-                            <tr><th>Full</th><th>Short</th><th>Audio</th></tr>
-                            <tr><td>I am</td><td><strong>I'm</strong></td><td><i class="fas fa-volume-up" onclick="speak('I am. I\'m.')"></i></td></tr>
-                            <tr><td>You are</td><td><strong>You're</strong></td><td><i class="fas fa-volume-up" onclick="speak('You are. You\'re.')"></i></td></tr>
-                            <tr><td>He is</td><td><strong>He's</strong></td><td><i class="fas fa-volume-up" onclick="speak('He is. He\'s.')"></i></td></tr>
-                            <tr><td>She is</td><td><strong>She's</strong></td><td><i class="fas fa-volume-up" onclick="speak('She is. She\'s.')"></i></td></tr>
-                            <tr><td>We are</td><td><strong>We're</strong></td><td><i class="fas fa-volume-up" onclick="speak('We are. We\'re.')"></i></td></tr>
-                            <tr><td>They are</td><td><strong>They're</strong></td><td><i class="fas fa-volume-up" onclick="speak('They are. They\'re.')"></i></td></tr>
-                        </table>
+                        <div id="quiz-ui" class="quiz-container">
+                            <div class="quiz-question" id="q-text">Question goes here...</div>
+                            <div class="quiz-options" id="q-options">
+                                </div>
+                        </div>
+
+                        <div id="quiz-result" class="result-box">
+                            <div class="score-circle" id="score-val">0</div>
+                            <h2 class="h2">Result</h2>
+                            <p id="score-msg">Keep practicing!</p>
+                            <button class="btn-primary" onclick="location.reload()">REINTENTAR</button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="glass-card">
-                    <h3>Negativo (NOT)</h3>
-                    <p>Solo agrega NOT. No uses "Don't".</p>
-                    <div class="audio-row">
-                        <div><span class="txt-en">She isn't here.</span></div>
-                        <button class="btn-play" onclick="speak('She isn\'t here')"><i class="fas fa-play"></i></button>
-                    </div>
-                    <div class="audio-row">
-                        <div><span class="txt-en">They aren't happy.</span></div>
-                        <button class="btn-play" onclick="speak('They aren\'t happy')"><i class="fas fa-play"></i></button>
-                    </div>
-                </div>
+            </div> <footer class="legal-footer">
+                <p>&copy; 2026 One English School System.</p>
+                <span class="gnu-badge">GNU GPL v3.0</span>
+            </footer>
 
-                <div class="glass-card">
-                    <h3>Preguntas (El Swap)</h3>
-                    <p>Intercambia el orden: <span class="chip">Verbo</span> + <span class="chip">Sujeto</span>.</p>
-                    <div style="text-align:center; padding:20px; font-size:1.2rem; font-weight:700;">
-                        You are <i class="fas fa-exchange-alt" style="color:var(--cyan); margin:0 10px;"></i> Are you?
-                    </div>
-                    <div class="audio-row">
-                        <div><span class="txt-en">Are you ready?</span></div>
-                        <button class="btn-play" onclick="speak('Are you ready?')"><i class="fas fa-play"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="lesson-slide" id="sec-3">
-                <h3 style="color:var(--error); padding-left:10px;">Zona de Peligro</h3>
-                
-                <div class="glass-card" style="border-color:var(--error);">
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-                        <i class="fas fa-radiation" style="color:var(--error); font-size:1.5rem;"></i>
-                        <h4 style="margin:0;">1. El error de "Tener"</h4>
-                    </div>
-                    <p>En español decimos "Tengo hambre" o "Tengo calor". En inglés NO se usa Have. Se usa <strong>BE</strong>.</p>
-                    
-                    <div class="error-box">
-                        <i class="fas fa-times-circle" style="color:var(--error);"></i> I have hungry. <br>
-                        <i class="fas fa-times-circle" style="color:var(--error);"></i> I have 20 years.
-                    </div>
-                    <div class="highlight-box" style="border-color:var(--success); background:#ecfdf5;">
-                        <i class="fas fa-check-circle" style="color:var(--success);"></i> I <strong>am</strong> hungry. <br>
-                        <i class="fas fa-check-circle" style="color:var(--success);"></i> I <strong>am</strong> 20 years old.
-                    </div>
-                </div>
-
-                <div class="glass-card">
-                    <h4>2. Short Answers</h4>
-                    <p>No digas solo "Yes". Di "Yes, I am". Pero nunca contraigas la respuesta afirmativa corta.</p>
-                    <div class="error-box">
-                        <i class="fas fa-times-circle" style="color:var(--error);"></i> Yes, I'm. (Incorrecto al terminar frase)
-                    </div>
-                    <div class="highlight-box" style="border-color:var(--success); background:#ecfdf5;">
-                        <i class="fas fa-check-circle" style="color:var(--success);"></i> Yes, I am. (Correcto)
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <footer class="app-footer">
-            <img src="https://drive.google.com/uc?export=view&id=10s6xhtE73EiO97ePKbnAsXuTP5RkvnTB" style="width:40px; border-radius:10px; margin-bottom:10px;">
-            <p>One English School System</p>
-            <div class="license-badge">GNU GPL 2026</div>
-        </footer>
-
-    </div>
+        </div> </div>
 
     <script>
-        // --- LOGIC ENGINE ---
+        /* ==========================================================================
+           LOGIC ENGINE (V4.0)
+           ========================================================================== */
         
-        // 1. Text to Speech
+        // --- 1. AUDIO SYSTEM (TTS) ---
         function speak(text) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const u = new SpeechSynthesisUtterance(text);
                 u.lang = 'en-US';
-                u.rate = 0.85;
+                u.rate = 0.85; // Optimized speed
                 window.speechSynthesis.speak(u);
             }
         }
 
-        // 2. Navigation
-        function go(index, pill) {
-            // Pills update
-            document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
-            pill.classList.add('active');
-            
-            // Content update
-            document.querySelectorAll('.lesson-slide').forEach(s => s.classList.remove('active'));
-            document.getElementById('sec-' + index).classList.add('active');
-            
-            // Scroll top slightly
-            window.scrollTo({ top: 300, behavior: 'smooth' });
+        // --- 2. AUTH SYSTEM ---
+        function handleLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById('user').value.trim();
+            const p = document.getElementById('pass').value.trim();
+            const portal = document.getElementById('portal-layer');
+            const app = document.getElementById('app-root');
+            const err = document.getElementById('error-msg');
+
+            if (u === "1englishdemo" && p === "1english2026") {
+                // Success
+                portal.style.opacity = '0';
+                setTimeout(() => {
+                    portal.style.display = 'none';
+                    app.style.display = 'flex'; // Important for flex layout
+                    setTimeout(() => app.style.opacity = '1', 50);
+                }, 600);
+            } else {
+                // Fail
+                err.style.display = 'flex';
+                // Shake effect logic
+                const wrap = document.querySelector('.login-wrapper');
+                wrap.animate([
+                    { transform: 'translateX(0)' }, 
+                    { transform: 'translateX(-10px)' }, 
+                    { transform: 'translateX(10px)' }, 
+                    { transform: 'translateX(0)' }
+                ], { duration: 300 });
+            }
+            return false;
         }
 
-        // 3. Login
-        function login() {
-            const u = document.getElementById('user').value;
-            const p = document.getElementById('pass').value;
-            const err = document.getElementById('error-txt');
+        // --- 3. NAVIGATION ---
+        function go(index, btn) {
+            // Update Pills
+            document.querySelectorAll('.nav-pill').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
             
-            if (u === "1englishdemo" && p === "1english2026") {
-                document.getElementById('portal-layer').style.opacity = '0';
-                document.getElementById('portal-layer').style.visibility = 'hidden';
-                
-                const app = document.getElementById('lms-root');
-                app.style.display = 'block';
-                setTimeout(() => app.style.opacity = '1', 50);
+            // Switch View
+            document.querySelectorAll('.section-view').forEach(s => s.classList.remove('active'));
+            document.getElementById('sec-' + index).classList.add('active');
+            
+            // Scroll Top
+            document.querySelector('.main-viewport').scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- 4. THEME ENGINE ---
+        function toggleTheme() {
+            const body = document.body;
+            const current = body.getAttribute('data-theme');
+            const icon = document.getElementById('theme-icon');
+            
+            if (current === 'dark') {
+                body.removeAttribute('data-theme');
+                icon.className = 'fas fa-moon';
             } else {
-                err.style.display = 'block';
-                document.querySelector('.glass-card-login').classList.add('shake');
-                setTimeout(() => document.querySelector('.glass-card-login').classList.remove('shake'), 500);
+                body.setAttribute('data-theme', 'dark');
+                icon.className = 'fas fa-sun';
             }
         }
-        
-        // Enter key for login
-        document.getElementById('pass').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') login();
-        });
+
+        // --- 5. INTERACTIVE LAB (Fill Blanks) ---
+        function checkAnswer(input, correct) {
+            const val = input.value.toLowerCase().trim();
+            if (val === correct) {
+                input.className = "input-blank correct";
+                confetti({ particleCount: 30, spread: 50, origin: { y: 0.6 } });
+            } else {
+                input.className = "input-blank wrong";
+            }
+        }
+
+        // --- 6. QUIZ ENGINE ---
+        const quizData = [
+            { q: "She ____ my best friend.", opts: ["are", "is", "am"], a: "is" },
+            { q: "____ they from Mexico?", opts: ["Is", "Am", "Are"], a: "Are" },
+            { q: "I ____ (not) hungry.", opts: ["don't", "amn't", "am not"], a: "am not" },
+            { q: "We ____ happy today.", opts: ["is", "are", "be"], a: "are" },
+            { q: "How old ____ you?", opts: ["are", "is", "have"], a: "are" }
+        ];
+        let qIndex = 0;
+        let score = 0;
+
+        function startQuiz() {
+            document.getElementById('quiz-start').style.display = 'none';
+            document.getElementById('quiz-ui').style.display = 'block';
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (qIndex >= quizData.length) return finishQuiz();
+            
+            const data = quizData[qIndex];
+            document.getElementById('q-text').innerText = `${qIndex + 1}. ${data.q}`;
+            
+            const optsDiv = document.getElementById('q-options');
+            optsDiv.innerHTML = '';
+            
+            data.opts.forEach(opt => {
+                const btn = document.createElement('div');
+                btn.className = 'quiz-btn';
+                btn.innerText = opt;
+                btn.onclick = () => handleAnswer(opt, data.a);
+                optsDiv.appendChild(btn);
+            });
+        }
+
+        function handleAnswer(selected, correct) {
+            if (selected === correct) score++;
+            qIndex++;
+            loadQuestion();
+        }
+
+        function finishQuiz() {
+            document.getElementById('quiz-ui').style.display = 'none';
+            document.getElementById('quiz-result').style.display = 'block';
+            document.getElementById('score-val').innerText = score + "/" + quizData.length;
+            
+            if(score === quizData.length) {
+                document.getElementById('score-msg').innerText = "Perfect Score! Certified.";
+                confetti();
+            }
+        }
 
     </script>
 </body>
